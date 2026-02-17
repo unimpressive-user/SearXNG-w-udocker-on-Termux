@@ -11,27 +11,27 @@ Optional: Termux:Boot
 **Update Termux packages**\
    Open Termux and run:
          
-      pkg update && pkg upgrade -y
+    $ pkg update && pkg upgrade -y
    If prompted during the first update:\
       Press Enter to select the defaults
 
 **Install Udocker:**
 
-    pkg install udocker -y
+    $ pkg install udocker -y
 
 **Pull the SearXNG Docker Image**
 
-    udocker pull docker.io/searxng/searxng:latest
+    $ udocker pull docker.io/searxng/searxng:latest
    Note: Download may take several minutes.
 
 **Create the Container**
    
-    udocker create --name=searxng docker.io/searxng/searxng:latest
+    $ udocker create --name=searxng docker.io/searxng/searxng:latest
    Note: It may take a few minutes.
 
 **Run SearXNG**\
 
-    udocker run searxng
+    $ udocker run searxng
    Wait until [INFO] Started worker-1 appears on your screen before continuing.
    
    Open your browser and go to:
@@ -48,10 +48,10 @@ Optional: Termux:Boot
    
    Create Boot Directory
 
-    mkdir -p ~/.termux/boot
+    $ mkdir -p ~/.termux/boot
    Create Startup Script
 
-    nano ~/.termux/boot/start-searxng
+    $ nano ~/.termux/boot/start-searxng
 Paste:
 
     #!/bin/bash
@@ -59,21 +59,21 @@ Paste:
     udocker run searxng
    Save file:
    
-   CTRL + O
+    CTRL + O
    
-   Press Enter
+    Press Enter
    
-   CTRL + X
+    CTRL + X
       
    Make it executable:
 
-    chmod +x ~/.termux/boot/start-searxng
+    $ chmod +x ~/.termux/boot/start-searxng
 Test Boot Script Without Reboot
 
-    cd ~/.termux/boot/
+    $ cd ~/.termux/boot/
     
     ./start-searxng
-   If it starts , it will also start after device reboot.
+   If it starts, it will also start after device reboot.
 
 **Useful**
 

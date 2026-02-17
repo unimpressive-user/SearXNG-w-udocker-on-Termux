@@ -1,30 +1,85 @@
-# How to run SearXNG on android with Termux without root.
+# Run SearXNG on Android with Termux (No Root) #
+   This guide explains how to run SearXNG inside Termux using udocker, without root access.\
+   It also includes optional automation using Termux:Boot.
 
-**Requirements:**
-   - Termux - Disable battery optimizations in phone settings, launch at least once
-        - Optional: Termux:Boot (for automation) - Disable battery optimizations in phone settings, launch at least once
+**Requirements:** Termux
 
-Termux setup:
-Updating Termux packages
-1 pkg update && pkg upgrade -y
-   - when prompted during the first pkg update select the default option by pressing enter.
-Installing Udocker
-2 pkg install udocker -y
+Optional: Termux:Boot
 
-Udocker setup:
-Pulling SearXNG docker image, more info at docs.searxng.org/admin/installation-docker.html
-1 udocker pull docker.io/searxng/searxng:latest
-Creating udocker container - might take a bit
-2 udocker create --name=searxng docker.io/searxng/searxng:latest
-Running the container
-3 udocker run searxng
-now you can test if it's working by opening a webbrowser and going to localhost:8080 or 127.0.0.1:8080
-Config full path "/data/data/com.termux/files/home/.udocker/containers/searxng/ROOT/etc/searxng/settings.yml"
+**After installing:** Open each app at least once and disable battery optimization. If battery optimization is not disabled, Android may murder them and their blood will be on your hands.
 
-Termux:Boot Setup
-1 mkdir ~/.termux/boot
-2 nano ~/.termux/boot/start-searxng
-#!/bin/bash
-termux-wake-lock
-udocker run searxng
-3 chmod +x ~/.termux/boot/start-searxng
+**Update Termux packages**\
+   Open Termux and run:
+         
+      pkg update && pkg upgrade -y
+   If prompted during the first update:\
+      Press Enter to select the defaults
+
+**Install Udocker:**
+
+    pkg install udocker -y
+
+**Pull the SearXNG Docker Image**
+
+    udocker pull docker.io/searxng/searxng:latest
+   Note: Download may take several minutes.
+
+**Create the Container**
+   
+    udocker create --name=searxng docker.io/searxng/searxng:latest
+   Note: It may take a few minutes.
+
+**Run SearXNG**\
+
+    udocker run searxng
+   Wait until [INFO] Started worker-1 appears on your screen before continuing.
+   
+   Open your browser and go to:
+
+    http://127.0.0.1:8080
+   If SearXNG loads, it is working.
+   
+   Note: You can stop the server with:
+      
+    CTRL + C
+**Optional: Auto-Start on Boot**
+
+   Requires Termux:Boot.
+   
+   Create Boot Directory
+
+    mkdir -p ~/.termux/boot
+   Create Startup Script
+
+    nano ~/.termux/boot/start-searxng
+Paste:
+
+    #!/bin/bash
+    termux-wake-lock
+    udocker run searxng
+   Save file:
+   
+   CTRL + O
+   
+   Press Enter
+   
+   CTRL + X
+      
+   Make it executable:
+
+    chmod +x ~/.termux/boot/start-searxng
+Test Boot Script Without Reboot
+
+    cd ~/.termux/boot/
+    
+    ./start-searxng
+   If it starts , it will also start after device reboot.
+
+**Useful**
+
+   SearXNG configuration File:
+
+    /data/data/com.termux/files/home/.udocker/containers/searxng/ROOT/etc/searxng/settings.yml
+   [SearXNG](https://docs.searxng.org)\
+   [Termux](termux.dev)
+   

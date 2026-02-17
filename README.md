@@ -18,3 +18,13 @@ Creating udocker container - might take a bit
 2 udocker create --name=searxng docker.io/searxng/searxng:latest
 Running the container
 3 udocker run searxng
+now you can test if it's working by opening a webbrowser and going to localhost:8080 or 127.0.0.1:8080
+Config full path "/data/data/com.termux/files/home/.udocker/containers/searxng/ROOT/etc/searxng/settings.yml"
+
+Termux:Boot Setup
+1 mkdir ~/.termux/boot
+2 nano ~/.termux/boot/start-searxng
+#!/bin/bash
+termux-wake-lock
+udocker run searxng
+3 chmod +x ~/.termux/boot/start-searxng

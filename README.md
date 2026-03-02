@@ -81,5 +81,5 @@ Test Boot Script Without Reboot
 
     /data/data/com.termux/files/home/.udocker/containers/searxng/ROOT/etc/searxng/settings.yml
    [SearXNG](https://docs.searxng.org)\
-   [Termux](termux.dev)
+   [Termux](https://termux.dev)
    

@@ -29,7 +29,7 @@ Optional: Termux:Boot
     $ udocker create --name=searxng docker.io/searxng/searxng:latest
    Note: It may take a few minutes.
 
-**Run SearXNG**\
+**Run SearXNG**
 
     $ udocker run searxng
    Wait until [INFO] Started worker-1 appears on your screen before continuing.
